@@ -15,7 +15,8 @@ type UserApiCreateReq struct {
 
 type UserApiListReq struct {
 	sorm.Paging
-	sorm.OrderBy
+	// sorm.OrderBy `v:"order-by"`
+	sorm.OrderBy `v:"order-by:user,id,age,headImg#"`
 }
 
 type UserServiceCreateInput struct {

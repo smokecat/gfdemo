@@ -10,11 +10,11 @@ import (
 )
 
 func init() {
-  // Register sorm model fields map
-  sorm.RegisterModelFieldsMap(map[string]interface{}{"user": model.User{}})
+  // Register sorm model columns map
+  sorm.RegisterModelColumnsMap(map[string]interface{}{"user": model.User{}})
 
-  // Register custom rule
-  if err := gvalid.RegisterRule("contain-model-fields", sorm.RuleContainModelFields); err != nil {
-    g.Log().Panic("register rule contain-model-fields failed")
+  // Register order-by rule
+  if err := gvalid.RegisterRule(sorm.OrderByRuleName, sorm.RuleOrderBy); err != nil {
+    g.Log().Panicf("register rule `%s` failed", sorm.OrderByRuleName)
   }
 }
