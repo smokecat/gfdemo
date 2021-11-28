@@ -9,11 +9,24 @@ package model
 
 // User is the golang structure for table user.
 type User struct {
-    Id       uint64 `orm:"id,primary" json:"id"       description:""`                  //                    
-    Name     string `orm:"name"       json:"name"     description:"user name"`         // user name          
-    Nick     string `orm:"nick"       json:"nick"     description:"user nickname"`     // user nickname      
-    Password string `orm:"password"   json:"password" description:"user password"`     // user password      
-    Email    string `orm:"email"      json:"email"    description:"user email"`        // user email         
-    Age      uint   `orm:"age"        json:"age"      description:"user age"`          // user age           
-    HeadImg  string `orm:"head_img"   json:"headImg"  description:"user head img url"` // user head img url  
+    Id       uint64 `orm:"id,primary" json:"id"       description:""`                  //
+    Name     string `orm:"name"       json:"name"     description:"user name"`         // user name
+    Nick     string `orm:"nick"       json:"nick"     description:"user nickname"`     // user nickname
+    Password string `orm:"password"   json:"password" description:"user password"`     // user password
+    Email    string `orm:"email"      json:"email"    description:"user email"`        // user email
+    Age      uint   `orm:"age"        json:"age"      description:"user age"`          // user age
+    HeadImg  string `orm:"head_img"   json:"headImg"  description:"user head img url"` // user head img url
+}
+
+
+// Equipment is the golang structure for table equipment.
+type Equipment struct {
+    Id   uint64 `orm:"id,primary" json:"id"   description:""`                 //
+    Name string `orm:"name"       json:"name" description:"equipment name"`   // equipment name
+    Type uint   `orm:"type"       json:"type" description:"equipment type"`   // equipment type
+    Atk  int    `orm:"atk"        json:"atk"  description:"attack damage"`    // attack damage
+    Mag  int    `orm:"mag"        json:"mag"  description:"magical damage"`   // magical damage
+    Def  int    `orm:"def"        json:"def"  description:"physical defense"` // physical defense
+    Res  int    `orm:"res"        json:"res"  description:"magical defense"`  // magical defense
+    Spd  int    `orm:"spd"        json:"spd"  description:"speed"`            // speed
 }
