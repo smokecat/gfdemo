@@ -103,6 +103,7 @@ func TestRuleOrderBy(t *testing.T) {
     {"have model columns", args{ctx, genRule("user,id,name,age"), nil, "",
       map[string]interface{}{"orderColumns": "id," +
           "name"}}, false},
+    {"empty data", args{ctx, genRule(""), nil, "", map[string]interface{}{}}, false},
     // Failure cases.
     {"no model column and contain invalid columns", args{ctx, genRule("user"), nil, "",
       map[string]interface{}{"orderColumns": "id,invalidcol"}},

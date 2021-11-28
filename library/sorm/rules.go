@@ -56,7 +56,7 @@ func RuleOrderBy(ctx context.Context, rule string, value interface{}, message st
   g.Log().Debugf("Check rule `%s`: rule = `%v` value = `%v` message = `%v` data = `%+v`", OrderByRuleName, rule, value, message,
     data)
   // Set default message
-  if message == "The :attribute value is invalid" {
+  if message == "The :attribute value is invalid" || message == "" {
     message = defaultMessage
   }
 
@@ -76,30 +76,25 @@ func RuleOrderBy(ctx context.Context, rule string, value interface{}, message st
   }
 
   var orderBy = OrderBy{}
-  gconv.Struct(data, &orderBy)
   g.Log()
-  if err := gconv.Struct(data, orderBy); err != nil {
-    // Return nil if empty
-    if orderBy.OrderColumns == "" {
-      return nil
-    }
-
-    // Check OrderColumns. Get OrderColumns field from data
-    if err := checkOrderColumns(model, ruleColumns, orderBy.OrderColumns, message); err != nil {
-      return err
-    }
-
-    // Check OrderPositions
-    if err := checkOrderPositions(); err != nil {
-      return err
-    }
-
+  gconv.Struct(data, &orderBy)
+  // Return nil if empty
+  if orderBy.OrderColumns == "" {
     return nil
   }
 
-  g.Log().Debugf("result of `%s` resolution: model = `%v` ruleColumns = `%v`", OrderByRuleName, model, ruleColumns)
+  // Check OrderColumns. Get OrderColumns field from data
+  if err := checkOrderColumns(model, ruleColumns, orderBy.OrderColumns, message); err != nil {
+    return err
+  }
 
-  return errors.New("given data can not convert to OrderBy struct")
+  // Check OrderPositions
+  if err := checkOrderPositions(); err != nil {
+    return err
+  }
+
+  g.Log().Debugf("result of `%s` resolution: model = `%v` ruleColumns = `%v`", OrderByRuleName, model, ruleColumns)
+  return nil
 }
 
 // checkOrderColumns check OrderColumns field.
