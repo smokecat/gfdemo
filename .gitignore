@@ -18,4 +18,9 @@ main
 gf-empty
 .vscode
 go.sum
+
+# development config file. GF_GCFG_FILE=config.dev.toml
 config.dev.toml
+
+# go test cover file
+cover.out
