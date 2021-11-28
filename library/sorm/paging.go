@@ -5,8 +5,8 @@ type Paging struct {
 	Size int `json:"size" v:"required|integer|min:1#||"`
 }
 
-// ToLimitParam convert page and size to offeset and take
-func (p Paging) ToLimitParam() (int, int) {
+// ToLimitParam convert page and size to offset and limit
+func (p Paging) ToLimitParam() (offset int, limit int) {
 	return (p.Page - 1) * p.Size, p.Size
 }
 

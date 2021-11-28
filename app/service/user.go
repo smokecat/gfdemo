@@ -30,7 +30,6 @@ func (u *userService) List(ctx context.Context, in *model.UserServiceListInput) 
   if err := dao.User.Ctx(ctx).Limit(in.ToLimitParam()).Order(in.
     ToOrderByParam()).Scan(&users); err != nil {
     return nil, err
-  } else {
-    return &model.UserServiceListOutput{Users: users}, nil
   }
+  return &model.UserServiceListOutput{Users: users}, nil
 }
